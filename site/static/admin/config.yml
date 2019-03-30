@@ -1,0 +1,50 @@
+backend:
+  name: git-gateway
+
+publish_mode: editorial_workflow
+media_folder: "site/static/uploads" # Folder where user uploaded files should go
+public_folder: "uploads"
+
+collections:
+  - name: "blog-fr"
+    label: "Blog (fr)"
+    extension: fr.md
+    format: frontmatter
+    folder: "site/content/blog"
+    create: true
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Brouillon", name: "draft", widget: "boolean", default: true }
+      - { label: "Date de publication", name: "date", widget: "datetime" }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          required: false,
+        }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["news"] }
+      - { label: "Auteurs", name: "authors", widget: "list" }
+      - { label: "Contenu", name: "body", widget: "markdown" }
+  - name: "blog-en"
+    label: "Blog (en)"
+    extension: en.md
+    format: frontmatter
+    folder: "site/content/blog"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          required: false,
+        }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["news"] }
+      - { label: "Authors", name: "authors", widget: "list" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+# TODO Add each page to be editable

@@ -1,0 +1,26 @@
+[[main]]
+    weight = 1
+    name = "Fonctionnalités"
+    URL = "/features"
+
+[[main]]
+    weight = 1
+    name = "Pricing"
+    URL = "/pricing"
+
+[[main]]
+    weight = 2
+    name = "Ressources"
+    hasChildren = true
+
+    [[main]]
+    parent = "Ressources"
+    name = "Blog"
+    URL = "/blog"
+    weight = 1
+
+    [[main]]
+    parent = "Ressources"
+    name = "Contact"
+    URL = "/contact"
+    weight = 3

@@ -1,0 +1,13 @@
+languageName = "Fr"
+weight = 1
+languageCode = "fr"
+title = "Mon site"
+copyright = 'Copyright me.'
+
+[[socialIcon]]
+  icon = "ti-facebook"
+  URL = "#"
+
+[[socialIcon]]
+  icon = "ti-twitter-alt"
+  URL = "#"
