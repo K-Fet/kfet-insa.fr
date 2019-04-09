@@ -22,13 +22,38 @@ if (process.env.HUGO_VERSION) {
   HUGO_BIN = "hugo";
 }
 
-if (process.env.DEPLOY_PRIME_URL) {
-  DEFAULT_ARGS.push("-b", process.env.DEPLOY_PRIME_URL);
-}
-
 if (process.env.DEBUG) {
   DEFAULT_ARGS.unshift("--debug");
 }
+
+const setHugoURL = port => {
+  // First remove existing -b param
+
+  const idx = DEFAULT_ARGS.indexOf("-b");
+  if (idx > -1) {
+    DEFAULT_ARGS.splice(idx, 2);
+  }
+
+  let url;
+  // In Netlify
+  if (process.env.CONTEXT) {
+    switch (process.env.CONTEXT) {
+      case "production":
+        url = process.env.URL;
+        break;
+      case "deploy-preview":
+      case "branch-deploy":
+      default:
+        url = process.env.DEPLOY_PRIME_URL;
+        break;
+    }
+  } else {
+    url = `http://localhost:${port || 3000}`;
+  }
+  DEFAULT_ARGS.push("-b", url);
+};
+
+setHugoURL();
 
 function buildSite(options) {
   const args = Array.isArray(options)
@@ -80,6 +105,7 @@ async function js({ minify }) {
     name: "app",
     sourcemap: true
   });
+  browserSync.reload("notify:false");
 }
 
 function clean() {
@@ -99,6 +125,8 @@ exports.default = series(
     watch("./src/js/**/*.js", js);
     watch("./src/css/**/*.css", css);
     watch("./site/**/*", () => hugo(["-e", "development"]));
-    return browserSync.init({ server: { baseDir: "./dist" } });
+    return browserSync.init({ server: { baseDir: "./dist" } }, (err, bs) =>
+      setHugoURL(bs.getOption("port"))
+    );
   }
 );

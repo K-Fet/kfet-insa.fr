@@ -1,0 +1,3 @@
+[submodule "site/themes/sodium"]
+	path = site/themes/sodium
+	url = https://github.com/K-Fet/hugo-sodium-theme
