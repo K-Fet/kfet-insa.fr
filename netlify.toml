@@ -7,3 +7,17 @@
 
 [context.deploy-preview]
   command = "yarn build-preview"
+
+## For now, disable the website and redirect to the app
+## TODO Remove when the website is done
+[[redirects]]
+from = "https://kfet-insa.fr/*"
+to = "https://app.kfet-insa.fr/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "http://kfet-insa.fr/*"
+to = "https://app.kfet-insa.fr/:splat"
+status = 301
+force = true
